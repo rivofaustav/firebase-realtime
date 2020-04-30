@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './BlogPost.css';
 import Post from "../../component/BlogPost/Post";
-import API from "../../services";
+// import API from "../../services";
 import firebase from "firebase";
 import firebaseConfig from "../../firebase/config";
 
@@ -39,7 +39,7 @@ class BlogPost extends Component{
         }
     }
 
-    handleHapusArtikel = (data) => {        
+    handleHapusArtikel = (idArtikel) => {        
         const {listArtikel} = this.state;
         const newState = listArtikel.filter(data => {
             return data.uid !== idArtikel;
@@ -98,6 +98,7 @@ class BlogPost extends Component{
                             <textarea className="form-control" id="body" name="body" rows="3" ref="isiArtikel"></textarea>
                         </div>
                     </div>
+                    <input type="hidden" name="uid" ref="uid" />
                     <button type="submit" className="btn btn-primary" onClick={this.handleTombolSimpan}>Simpan</button>
                 </div>
                 <h2>Daftar Artikel</h2>
