@@ -15,7 +15,7 @@ class BlogPost extends Component{
         }
     }
 
-    ambilDataDariServerAPI = () => {                // fungsi untuk mengambil data dari API dengan penambahan sort dan order
+    ambilDataDariServerAPI = () => {
        let ref = firebase.database().ref("/");
        ref.on("value", snapshot => {
            const state = snapshot.val();
@@ -29,8 +29,8 @@ class BlogPost extends Component{
             .set(this.state);
     }
 
-    componentDidMount() {       // komponen untuk mengecek ketika compnent telah di-mount-ing, maka panggil API
-        this.ambilDataDariServerAPI()  // ambil data dari server API lokal
+    componentDidMount() {       
+        this.ambilDataDariServerAPI() 
     }
 
     componentDidUpdate(prevProp, prevState){
@@ -39,7 +39,7 @@ class BlogPost extends Component{
         }
     }
 
-    handleHapusArtikel = (data) => {        // fungsi yang meng-handle button action hapus data
+    handleHapusArtikel = (data) => {        
         const {listArtikel} = this.state;
         const newState = listArtikel.filter(data => {
             return data.uid !== idArtikel;
@@ -47,17 +47,17 @@ class BlogPost extends Component{
         this.setState({listArtikel: newState});
     }
 
-    handleTambahArtikel = (event) => {      // fungsi untuk meng-hadle form tambah data artikel
-        let formInsertArtikel = {...this.state.insertArtikel};      // clonning data state insertArtikel ke dalam variabel formInsertArtikel
-        let timestamp = new Date().getTime();                       // digunakan untuk menyimpan waktu (sebagai ID artikel)
+    handleTambahArtikel = (event) => {     
+        let formInsertArtikel = {...this.state.insertArtikel};      
+        let timestamp = new Date().getTime();                      
         formInsertArtikel['id'] = timestamp;
-        formInsertArtikel[event.target.name] = event.target.value;  // menyimpan data onchange ke formInsertArtikel sesuai dengan target yg diisi
+        formInsertArtikel[event.target.name] = event.target.value; 
         this.setState({
             insertArtikel: formInsertArtikel
         });
     }
 
-    handleTombolSimpan = () => {            // fungsi untuk meng-handle tombol simpan
+    handleTombolSimpan = () => {           
         let title = this.refs.judulArtikel.value;
         let body = this.refs.isiArtikel.value;
         let uid = this.refs.uid.value;
@@ -102,8 +102,8 @@ class BlogPost extends Component{
                 </div>
                 <h2>Daftar Artikel</h2>
                 {
-                    this.state.listArtikel.map(artikel => {  // looping dan masukkan untuk setiap data yang ada di listArtikel ke variabel artikel
-                        return <Post key={artikel.uid} judul={artikel.title} isi={artikel.body} idArtikel={artikel.uid} hapusArtikel={this.handleHapusArtikel}/>     // mappingkan data json dari API sesuai dengan kategorinya
+                    this.state.listArtikel.map(artikel => {  
+                        return <Post key={artikel.uid} judul={artikel.title} isi={artikel.body} idArtikel={artikel.uid} hapusArtikel={this.handleHapusArtikel}/>
                     })
                 }
             </div>
