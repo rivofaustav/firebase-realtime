@@ -89,13 +89,13 @@ class BlogPost extends Component{
                     <div className="form-group row">
                         <label htmlFor="title" className="col-sm-2 col-form-label">Judul</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="title" name="title" onChange={this.handleTambahArtikel}/>
+                            <input type="text" className="form-control" id="title" name="title" ref="judulArtikel"/>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="body" className="col-sm-2 col-form-label">Isi</label>
                         <div className="col-sm-10">
-                            <textarea className="form-control" id="body" name="body" rows="3" onChange={this.handleTambahArtikel}></textarea>
+                            <textarea className="form-control" id="body" name="body" rows="3" ref="isiArtikel"></textarea>
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary" onClick={this.handleTombolSimpan}>Simpan</button>
@@ -103,7 +103,7 @@ class BlogPost extends Component{
                 <h2>Daftar Artikel</h2>
                 {
                     this.state.listArtikel.map(artikel => {  // looping dan masukkan untuk setiap data yang ada di listArtikel ke variabel artikel
-                        return <Post key={artikel.id} judul={artikel.title} isi={artikel.body} idArtikel={artikel.id} hapusArtikel={this.handleHapusArtikel}/>     // mappingkan data json dari API sesuai dengan kategorinya
+                        return <Post key={artikel.uid} judul={artikel.title} isi={artikel.body} idArtikel={artikel.uid} hapusArtikel={this.handleHapusArtikel}/>     // mappingkan data json dari API sesuai dengan kategorinya
                     })
                 }
             </div>
